@@ -1,0 +1,4 @@
+rootProject.name = 'dependency-check'
+include 'level1'
+include 'level2'
+

@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'sounie'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'io.github.classgraph:classgraph:4.6.13',
+            'com.sun.jersey:jersey-client:1.19.4'
+    )
+
+
+    testCompile(
+            'junit:junit:4.12'
+    )
+}
