@@ -5,6 +5,7 @@ Example of checking whether an application includes a dependency on particular p
 ## Dependencies of this project
 - Junit for unit tests.
 - ClassGraph for scanning the code to build up relations.
+- Gradlew for building
 
 ## Motivation
 Some Java libraries and frameworks specify a broad range of dependencies. 
