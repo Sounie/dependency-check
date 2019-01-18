@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'sounie'
@@ -23,3 +24,16 @@ dependencies {
             'junit:junit:4.12'
     )
 }
+
+publishing {
+    publications {
+        sounieDependencyCheck(MavenPublication) {
+            from components.java
+            
+            pom {
+                description = 'This is a generated file to enable github to report dependencies.  Please use gradlew for building.'
+            }
+        }
+    }
+}
+
