@@ -15,6 +15,12 @@ public class PathChecker {
         this.unwantedPackages = unwantedPackages;
     }
 
+    /**
+     * Check whether there is a dependency relationship detectable from the rootPackage to any of the specified
+     * unwanted packages.
+     *
+     * @return
+     */
     public boolean checkDependencyPath() {
         boolean pathFound = false;
 
@@ -38,7 +44,22 @@ public class PathChecker {
             for (ClassInfo classInfo : classInfoSet) {
                 if (unwantedPackages.contains(classInfo.getPackageName())) {
                     pathFound = true;
+
                     System.out.println("Found class with unwanted package: " + classInfo);
+                    break;
+                }
+            }
+
+            if (!pathFound) {
+                // Checking if class is in a sub-package of an unwanted package
+                for (ClassInfo classInfo : classInfoSet) {
+                    // TODO: consider replacing with stream findAny
+                    for (String unwantedPackage : unwantedPackages) {
+                        if (classInfo.getPackageName().startsWith(unwantedPackage)) {
+                            pathFound = true;
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -49,15 +70,19 @@ public class PathChecker {
     private static void accumulateChildClasses(Set<ClassInfo> classInfoSet, ClassInfo classInfo) {
         ClassInfoList classDependencies = classInfo.getClassDependencies();
         for (ClassInfo dependencyClassInfo : classDependencies) {
-            System.out.println("dependencies of " + dependencyClassInfo);
-            classInfoSet.add(dependencyClassInfo);
-            ClassInfoList nestedDependencies = classInfo.getClassDependencies();
-            for (ClassInfo nestedDependency : nestedDependencies) {
-                System.out.println("checking level for " + nestedDependency.getName());
-                if (!classInfoSet.contains(nestedDependency)) {
-                    accumulateChildClasses(classInfoSet, nestedDependency);
-                    classInfoSet.add(nestedDependency);
+            if (!classInfoSet.contains(dependencyClassInfo)) {
+                System.out.println("dependencies of " + dependencyClassInfo);
+                classInfoSet.add(dependencyClassInfo);
+                ClassInfoList nestedDependencies = classInfo.getClassDependencies();
+                for (ClassInfo nestedDependency : nestedDependencies) {
+                    System.out.println("checking level for " + nestedDependency.getName());
+                    if (!classInfoSet.contains(nestedDependency)) {
+                        accumulateChildClasses(classInfoSet, nestedDependency);
+                        classInfoSet.add(nestedDependency);
+                    }
                 }
+            } else {
+                System.out.println("Already seen " + dependencyClassInfo);
             }
         }
     }

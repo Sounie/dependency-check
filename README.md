@@ -20,10 +20,17 @@ runtime when some untested path through a library is reached?
 
 
 ## Version history
-First attempt just starts from a specified class, then recursively steps through the detected dependencies
+Current implementation
+ * Recursively checks from initial package, checking whether any dependency exists that would
+   introduce a class from one of the unwanted packages, or any sub-package.
+
+First attempt
+ * Just starts from a specified package, then recursively steps through the detected dependencies
 and accumulates the class names and checks whether a class is in one of the specified unwanted
 packages.
 A single object with 2 unit tests.  Not set up as a distributable artifact.
+
+
 
 ## Potential enhancements
 - Check whether each class's package doesn't start with one of the specified unwanted packages.
