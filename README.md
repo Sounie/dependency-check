@@ -30,11 +30,6 @@ and accumulates the class names and checks whether a class is in one of the spec
 packages.
 A single object with 2 unit tests.  Not set up as a distributable artifact.
 
-
-
-## Potential enhancements
-- Check whether each class's package doesn't start with one of the specified unwanted packages.
-
 ## Known limitations
 - The recursive approach to accumulating dependency class information could potentially run out of stack.
 - Don't think we will pick up on dependencies that are brought in by Reflection
