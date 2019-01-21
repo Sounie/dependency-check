@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.6.13',
+            'io.github.classgraph:classgraph:4.6.18',
             'com.sun.jersey:jersey-client:1.19.4'
     )
 
