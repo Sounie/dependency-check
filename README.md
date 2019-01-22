@@ -37,8 +37,8 @@ A single object with 2 unit tests.  Not set up as a distributable artifact.
 - The recursive approach to accumulating dependency class information could potentially run out of stack.
 - Don't think we will pick up on dependencies that are brought in by Reflection
 - If a dependency brings in is dependencies as "shaded" classes, then those will not match against
-  our specified exclusions.  This occurred as a potential gotcha when I read the [https://hadoop.apache.org/docs/r3.2.0/][documentation
-                                                                                                                             for hadoop 3.2.0].
+  our specified exclusions.  This occurred as a potential gotcha when I read the 
+  [documentation for hadoop 3.2.0](https://hadoop.apache.org/docs/r3.2.0/).
     
  
 
