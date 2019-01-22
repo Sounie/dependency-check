@@ -23,6 +23,9 @@ runtime when some untested path through a library is reached?
 Current implementation
  * Recursively checks from initial package, checking whether any dependency exists that would
    introduce a class from one of the unwanted packages, or any sub-package.
+ * Unit tests attempt to check whether code that references apache hadoop mapreduce functionality
+   would lead to the Jersey server or Jersey packages that are included as dependencies
+   of that hadoop client artifact.
 
 First attempt
  * Just starts from a specified package, then recursively steps through the detected dependencies
@@ -33,6 +36,14 @@ A single object with 2 unit tests.  Not set up as a distributable artifact.
 ## Known limitations
 - The recursive approach to accumulating dependency class information could potentially run out of stack.
 - Don't think we will pick up on dependencies that are brought in by Reflection
+- If a dependency brings in is dependencies as "shaded" classes, then those will not match against
+  our specified exclusions.  This occurred as a potential gotcha when I read the [https://hadoop.apache.org/docs/r3.2.0/][documentation
+                                                                                                                             for hadoop 3.2.0].
+    
  
 
     
+
+[]: https://hadoop.apache.org/docs/r3.2.0/
+
+[]: https://hadoop.apache.org/docs/r3.2.0/
