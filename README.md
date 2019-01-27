@@ -35,8 +35,10 @@ A single object with 2 unit tests.  Not set up as a distributable artifact.
 
 ## Known limitations
 - The recursive approach to accumulating dependency class information could potentially run out of stack.
-- Don't think we will pick up on dependencies that are brought in by Reflection, including dependency
-  injection frameworks driven by classpath scanning or XML files. 
+- Won't pick up on dependencies that are brought in by reflection, including dependency
+  injection frameworks driven by classpath scanning or XML files.  e.g. if your code specifies an 
+  interface, then the framework detects an implementation in your classpath and wires it in 
+  at runtime, the compile time checking applied in this system wouldn't pick that up. 
 - If a dependency brings in is dependencies as "shaded" classes, then those will not match against
   our specified exclusions.  This occurred as a potential gotcha when I read the 
   [documentation for hadoop 3.2.0](https://hadoop.apache.org/docs/r3.2.0/).
