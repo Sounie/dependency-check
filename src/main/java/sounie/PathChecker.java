@@ -51,20 +51,16 @@ public class PathChecker {
     }
 
     private boolean isPathFoundStartingWithUnwantedPackage(Set<ClassInfo> classInfoSet) {
-        boolean pathFound = false;
-        // Checking if class is in a sub-package of an unwanted package
-        outer:
         for (ClassInfo classInfo : classInfoSet) {
             // TODO: consider replacing with stream findAny
             for (String unwantedPackage : unwantedPackages) {
                 if (classInfo.getPackageName().startsWith(unwantedPackage)) {
-                    pathFound = true;
-                    break outer;
+                    return true;
                 }
             }
         }
 
-        return pathFound;
+        return false;
     }
 
     private boolean isPathFoundWithMatchingName(Set<ClassInfo> classInfoSet) {
