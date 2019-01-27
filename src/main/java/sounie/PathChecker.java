@@ -41,40 +41,43 @@ public class PathChecker {
                 }
             }
 
-            pathFound = isPathFoundWithMatchingName(pathFound, classInfoSet);
+            pathFound = isPathFoundWithMatchingName(classInfoSet);
             if (!pathFound) {
-                pathFound = isPathFoundStartingWithUnwantedPackage(pathFound, classInfoSet);
+                pathFound = isPathFoundStartingWithUnwantedPackage(classInfoSet);
             }
         }
 
         return pathFound;
     }
 
-    private boolean isPathFoundStartingWithUnwantedPackage(boolean pathFound, Set<ClassInfo> classInfoSet) {
-        if (!pathFound) {
-            // Checking if class is in a sub-package of an unwanted package
-            for (ClassInfo classInfo : classInfoSet) {
-                // TODO: consider replacing with stream findAny
-                for (String unwantedPackage : unwantedPackages) {
-                    if (classInfo.getPackageName().startsWith(unwantedPackage)) {
-                        pathFound = true;
-                        break;
-                    }
+    private boolean isPathFoundStartingWithUnwantedPackage(Set<ClassInfo> classInfoSet) {
+        boolean pathFound = false;
+        // Checking if class is in a sub-package of an unwanted package
+        outer:
+        for (ClassInfo classInfo : classInfoSet) {
+            // TODO: consider replacing with stream findAny
+            for (String unwantedPackage : unwantedPackages) {
+                if (classInfo.getPackageName().startsWith(unwantedPackage)) {
+                    pathFound = true;
+                    break outer;
                 }
             }
         }
+
         return pathFound;
     }
 
-    private boolean isPathFoundWithMatchingName(boolean pathFound, Set<ClassInfo> classInfoSet) {
+    private boolean isPathFoundWithMatchingName(Set<ClassInfo> classInfoSet) {
+        boolean pathFound = false;
+
         for (ClassInfo classInfo : classInfoSet) {
             if (unwantedPackages.contains(classInfo.getPackageName())) {
                 pathFound = true;
 
-                System.out.println("Found class with unwanted package: " + classInfo);
                 break;
             }
         }
+
         return pathFound;
     }
 
