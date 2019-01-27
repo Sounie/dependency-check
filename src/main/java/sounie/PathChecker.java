@@ -1,12 +1,15 @@
 package sounie;
 
 import io.github.classgraph.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class PathChecker {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PathChecker.class);
+
     private final String rootPackage;
     private final Set<String> unwantedPackages;
 
@@ -81,18 +84,18 @@ public class PathChecker {
         ClassInfoList classDependencies = classInfo.getClassDependencies();
         for (ClassInfo dependencyClassInfo : classDependencies) {
             if (!classInfoSet.contains(dependencyClassInfo)) {
-                System.out.println("dependencies of " + dependencyClassInfo);
+                LOGGER.debug("dependencies of " + dependencyClassInfo);
                 classInfoSet.add(dependencyClassInfo);
                 ClassInfoList nestedDependencies = classInfo.getClassDependencies();
                 for (ClassInfo nestedDependency : nestedDependencies) {
-                    System.out.println("checking level for " + nestedDependency.getName());
+                    LOGGER.debug("checking level for " + nestedDependency.getName());
                     if (!classInfoSet.contains(nestedDependency)) {
                         accumulateChildClasses(classInfoSet, nestedDependency);
                         classInfoSet.add(nestedDependency);
                     }
                 }
             } else {
-                System.out.println("Already seen " + dependencyClassInfo);
+                LOGGER.debug("Already seen " + dependencyClassInfo);
             }
         }
     }

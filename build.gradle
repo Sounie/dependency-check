@@ -15,7 +15,8 @@ repositories {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.6.18'
+            'io.github.classgraph:classgraph:4.6.18',
+            'org.slf4j:slf4j-api:1.7.25'
     )
 
 
