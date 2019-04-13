@@ -25,18 +25,20 @@ public class PathChecker {
      * @return
      */
     public boolean checkDependencyPath() {
-        boolean pathFound = false;
+        boolean pathFound;
 
         Set<ClassInfo> classInfoSet = new HashSet<>();
 
         try (ScanResult scanResult = new ClassGraph()
+                .blacklistLibOrExtJars() // Excludes JDK jars
                 .verbose()
-                .enableAllInfo()
+//                .enableAllInfo()
                 .enableInterClassDependencies()
-                .scan(10))
+                .scan(2))
         {
             for (ClassInfo classInfo : scanResult.getAllClasses()) {
                 if (rootPackage.equals(classInfo.getPackageName())) {
+                    LOGGER.debug("found root package");
                     // Start from classes under rootPackage
                     // iterate through methods / fields (imports?)
                     // Medium term - Build up structure without recursion
@@ -84,18 +86,16 @@ public class PathChecker {
         ClassInfoList classDependencies = classInfo.getClassDependencies();
         for (ClassInfo dependencyClassInfo : classDependencies) {
             if (!classInfoSet.contains(dependencyClassInfo)) {
-                LOGGER.debug("dependencies of " + dependencyClassInfo);
                 classInfoSet.add(dependencyClassInfo);
                 ClassInfoList nestedDependencies = classInfo.getClassDependencies();
                 for (ClassInfo nestedDependency : nestedDependencies) {
-                    LOGGER.debug("checking level for " + nestedDependency.getName());
                     if (!classInfoSet.contains(nestedDependency)) {
                         accumulateChildClasses(classInfoSet, nestedDependency);
                         classInfoSet.add(nestedDependency);
                     }
                 }
             } else {
-                LOGGER.debug("Already seen " + dependencyClassInfo);
+                LOGGER.info("Already seen " + dependencyClassInfo);
             }
         }
     }

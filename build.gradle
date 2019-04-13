@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
+
 group 'sounie'
 version '1.0-SNAPSHOT'
 
@@ -13,10 +14,14 @@ repositories {
     mavenCentral()
 }
 
+test {
+    jvmArgs = ['-Xmx3G']
+}
+
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.6.18',
-            'org.slf4j:slf4j-api:1.7.25'
+            'io.github.classgraph:classgraph:4.8.24',
+            'org.slf4j:slf4j-api:1.7.26'
     )
 
 
@@ -31,7 +36,7 @@ publishing {
     publications {
         sounieDependencyCheck(MavenPublication) {
             from components.java
-            
+
             pom {
                 description = 'This is a generated file to enable github to report dependencies.  Please use gradlew for building.'
             }
