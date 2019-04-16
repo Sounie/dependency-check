@@ -15,7 +15,7 @@ repositories {
 }
 
 test {
-    jvmArgs = ['-Xmx3G']
+    jvmArgs = ['-Xmx1500M']
 }
 
 dependencies {
