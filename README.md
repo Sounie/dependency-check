@@ -3,9 +3,11 @@
 Example of checking whether an application includes a dependency on particular packages.
 
 ## Dependencies of this project
+- Java 11
 - Junit for unit tests.
 - ClassGraph for scanning the code to build up relations.
-- Gradlew for building
+- Gradlew for building (the pom.xml file is generated to allow Github to detect dependencies - don't 
+expect to be able to build with maven).
 
 ## Motivation
 Some Java libraries and frameworks specify a broad range of dependencies. 
