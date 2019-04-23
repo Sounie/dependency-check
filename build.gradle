@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'idea'
 }
 
 
@@ -16,6 +17,8 @@ repositories {
 
 test {
     jvmArgs = ['-Xmx1500M']
+
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -26,10 +29,13 @@ dependencies {
 
 
     testCompile(
-            'junit:junit:4.12',
             'com.sun.jersey:jersey-client:1.19.4',
             'org.apache.hadoop:hadoop-client:3.1.1'
     )
+
+    testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
+
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.4.2')
 }
 
 publishing {
