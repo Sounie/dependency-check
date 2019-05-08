@@ -23,7 +23,7 @@ test {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.8.28',
+            'io.github.classgraph:classgraph:4.8.31',
             'org.slf4j:slf4j-api:1.7.26'
     )
 
@@ -34,7 +34,6 @@ dependencies {
     )
 
     testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
-
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.4.2')
 }
 
