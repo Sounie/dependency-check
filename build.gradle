@@ -23,7 +23,7 @@ test {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.8.31',
+            'io.github.classgraph:classgraph:4.8.34',
             'org.slf4j:slf4j-api:1.7.26'
     )
 
