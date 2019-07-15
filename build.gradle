@@ -23,7 +23,7 @@ test {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.8.37',
+            'io.github.classgraph:classgraph:4.8.43',
             'org.slf4j:slf4j-api:1.7.26'
     )
 
@@ -33,8 +33,8 @@ dependencies {
             'org.apache.hadoop:hadoop-client:3.1.1'
     )
 
-    testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.0')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.5.0')
 }
 
 publishing {
@@ -43,7 +43,7 @@ publishing {
             from components.java
 
             pom {
-                description = 'This is a generated file to enable github to report dependencies.  Please use gradlew for building.'
+                description = 'This is a generated file to enable github to report dependencies.  Please use ./gradlew for building.'
             }
         }
     }
