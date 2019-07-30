@@ -5,7 +5,7 @@
   <groupId>sounie</groupId>
   <artifactId>dependency-check</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <description>This is a generated file to enable github to report dependencies.  Please use gradlew for building.</description>
+  <description>This is a generated file to enable github to report dependencies.  Please use ./gradlew for building.</description>
   <dependencies>
     <dependency>
       <groupId>io.github.classgraph</groupId>
