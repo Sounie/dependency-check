@@ -8,7 +8,10 @@ plugins {
 group 'sounie'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 11
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 repositories {
     mavenLocal()
@@ -22,13 +25,13 @@ test {
 }
 
 dependencies {
-    compile(
-            'io.github.classgraph:classgraph:4.8.44',
+    implementation(
+            'io.github.classgraph:classgraph:4.8.53',
             'org.slf4j:slf4j-api:1.7.28'
     )
 
 
-    testCompile(
+    testImplementation(
             'com.sun.jersey:jersey-client:1.19.4',
             'org.apache.hadoop:hadoop-client:3.1.1'
     )
