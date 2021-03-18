@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'idea'
-    id 'com.github.ben-manes.versions' version '0.33.0'
+    id 'com.github.ben-manes.versions' version '0.38.0'
 }
 
 
@@ -10,8 +10,9 @@ group 'sounie'
 version '1.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 repositories {
@@ -27,8 +28,8 @@ test {
 
 dependencies {
     compile(
-            'io.github.classgraph:classgraph:4.8.44',
-            'org.slf4j:slf4j-api:1.7.28'
+            'io.github.classgraph:classgraph:4.8.102',
+            'org.slf4j:slf4j-api:1.7.30'
     )
 
 
@@ -37,8 +38,8 @@ dependencies {
             'org.apache.hadoop:hadoop-client:3.3.0'
     )
 
-    testImplementation('org.junit.jupiter:junit-jupiter:5.7.0')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.7.0')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.7.1')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.7.1')
 }
 
 publishing {
