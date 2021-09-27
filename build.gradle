@@ -11,7 +11,7 @@ version '1.0-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 
     consistentResolution {
@@ -32,7 +32,7 @@ test {
 
 dependencies {
     implementation(
-            'io.github.classgraph:classgraph:4.8.115',
+            'io.github.classgraph:classgraph:4.8.116',
             'org.slf4j:slf4j-api:1.7.32'
     )
 
